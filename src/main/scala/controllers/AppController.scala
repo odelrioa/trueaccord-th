@@ -21,10 +21,7 @@ object AppController extends App {
   val paymentPlansF: Future[Seq[PaymentPlan]] = paymentService.get[Seq[PaymentPlan]](s"$apiPath/payment_plans")
   val paymentsF: Future[Seq[Payment]] = paymentService.get[Seq[Payment]](s"$apiPath/payments")
 
-  def printDebts(debtsF: Future[Seq[Debt]], paymentPlansF: Future[Seq[PaymentPlan]], paymentsF: Future[Seq[Payment]]) = {
-    println("################################################################")
-    println("Fasten your seat belt. We are ready for take off")
-    println("################################################################\n\n")
+  def getDebts(debtsF: Future[Seq[Debt]], paymentPlansF: Future[Seq[PaymentPlan]], paymentsF: Future[Seq[Payment]]) = {
     for {
       debts <- debtsF
       paymentPlans <- paymentPlansF
@@ -46,10 +43,15 @@ object AppController extends App {
           remaining_amount = Some(remainingAmount),
           next_payment_due_date = nextPaymentDueDateOpt
         )
-        println(Json.toJson(newDebt))
+        newDebt
       }
     }
   }
 
-  printDebts(debtsF, paymentPlansF, paymentsF)
+  getDebts(debtsF, paymentPlansF, paymentsF).map { debtList =>
+    println("################################################################")
+    println("Fasten your seat belt. We are ready for take off")
+    println("################################################################\n\n")
+    debtList.foreach(d  => println(Json.toJson(d)))
+  }
 }
