@@ -130,9 +130,9 @@ An individual payment installment which is made on a payment plan. Many-to-one w
  * Add custom writes method for Debt object in order to parse next_payment_due_date as null when there is no value
  * Implement helper methods in PaymentPlan
      - Method isActive to check if there is still a Payment Plan active for a debt
-     - Define Int constants for posible frequencies
+     - Define Int constants for possible frequencies
      - Method getFrequencyFromString to get value as an Int
-     - Method getRemainingAmount to calcula what is left to pay for a debt
+     - Method getRemainingAmount to calculate what is left to pay for a debt
      - Method getInstallmentDates when clients are delayed for payments
      - Method getNextPaymentDueDate
  * Implement unit test. As a note I am not mocking the requests/responses for timing purposes
