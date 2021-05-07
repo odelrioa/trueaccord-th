@@ -1,4 +1,4 @@
-package services
+package main.scala.services
 
 import java.net.URL
 
